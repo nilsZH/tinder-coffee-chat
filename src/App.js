@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Link, Route, Switch } from 'react-router-dom';
+import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
+import Login from './login/Login';
+import Main from './main/Main';
+import Profile from './profile/Profile';
+import Matches from './matches/Matches';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">
+            Coffee Time
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+      <Route path="/login" component={Login} />
+      <Route exact={true} path="/" component={Main} />
+      <Route exact={true} path="/profile" component={Profile} />
+      <Route exact={true} path="/matches" component={Matches} />
     </div>
   );
 }
