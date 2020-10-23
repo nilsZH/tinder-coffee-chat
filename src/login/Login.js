@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import { useHistory, Link } from 'react-router-dom';
+import { Container, Button, Grid, TextField } from '@material-ui/core';
 import './Login.css';
 
 class Login extends Component {
   constructor(props){
     super(props);
     this.state={
-      username:''
+      username:'',
+      password: ''
     }
 
     this.handleUsername = this.handleUsername.bind(this);
@@ -24,7 +25,11 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    console.log('Your name is: ' + this.state.username + ' and your password is: ' + this.state.password);
+    let login = 'test';
+    if (this.state.password === login) {
+      this.setState({isAuthenticated: true})
+      this.history.push('/')
+    }
     event.preventDefault();
   } 
   
@@ -34,14 +39,29 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        Login<br />
-        <form>
-          <label>Username:</label> <input name="user" type="text" onChange={this.handleUsername}></input><br />
-          <label>Password:</label> <input name="password" type="password" onChange={this.handlePassword}></input><br />
-          <Button variant="contained" color="primary" type="submit" onClick={this.handleSubmit}>Get your coffee</Button>
-        </form>
-      </div>
+        <Container className="container" maxWidth="xs">
+          <form>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField fullWidth label="Username" name="username" size="small" variant="outlined" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField fullWidth label="Password" name="password" size="small" type="password" variant="outlined" />
+                  </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Button color="secondary" fullWidth type="submit" variant="contained">
+                      <Link to='/'>Log in</Link>
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </form>
+        </Container>
     );
   }
 }
