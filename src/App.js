@@ -9,6 +9,7 @@ import Profile from './profile/Profile';
 import Matches from './matches/Matches';
 import PrivateRoute from './PrivateRoute';
 import { AuthContext, useAuth } from "./context/auth";
+import { UserContext, useUser } from "./context/user";
 import './App.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,6 +63,7 @@ function App(props) {
 
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+      <UserContext.Provider value={{id: 1, username: "admin"}}>
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
@@ -110,6 +112,7 @@ function App(props) {
         <PrivateRoute exact={true} path="/profile" component={Profile} />
         <PrivateRoute exact={true} path="/matches" component={Matches} />
       </div>
+    </UserContext.Provider>
     </AuthContext.Provider>
   );
 }

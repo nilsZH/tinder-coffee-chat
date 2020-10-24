@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Container, Grid, CardContent, Chip, Typography, Button, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, Route, Switch, Redirect, useHistory } from 'react-router-dom';
@@ -10,16 +10,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useUser } from '../context/user';
+import axios from 'axios';
 import './Matches.css';
-
-function createData(id, lastname, firstname, link) {
-  return { id, lastname, firstname, link };
-}
-
-const rows = [
-  createData(1, 'zum Hebel', 'Nils', <a href="slack://user?team=TBL550SUB\&id=DDN0JAY79"><ChatIcon /></a>),
-  createData(2, 'Haas', 'Anke', <a href="slack://user?team=TBL550SUB\&id=D01CTNJ2CK1"><ChatIcon /></a>)
-];
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,7 +26,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Matches() {
+  const [matches, setMatches] = useState()
   const classes = useStyles();
+  const { username } = useUser()
+
+  React.useEffect(() => {
+    axios({
+      "method": "GET",
+      "url": "http://3.121.183.48/api/v1/users/",
+      "headers": {
+        "content-type": "application/json",
+      }
+    })
+    .then((response) => {
+      console.log(username)
+      setMatches(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, []);
+
+  let rows;
+  if (matches !== undefined && matches.length !== 0) {
+    rows = matches.map((match) => (
+      <TableRow key={match.id}>
+        <TableCell component="th" scope="row">
+          {match.username}
+        </TableCell>
+        <TableCell>
+          <Chip size="small" 
+                label={match.available ? "Available" : "Unavailable"} 
+                color={match.available ? "Primary" : "Basic"} />
+        </TableCell>
+        <TableCell>{match.link}</TableCell>
+      </TableRow>
+    ))
+  }
 
   return (
     <Container className={classes.root} maxWidth="xs">
@@ -48,21 +77,13 @@ function Matches() {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Lastname</TableCell>
-                  <TableCell >Firstname</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell >Availability</TableCell>
                   <TableCell>Link</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.lastname}
-                    </TableCell>
-                    <TableCell>{row.firstname}</TableCell>
-                    <TableCell>{row.link}</TableCell>
-                  </TableRow>
-                ))}
+                {rows}
               </TableBody>
             </Table>
           </TableContainer>
