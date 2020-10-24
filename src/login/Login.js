@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Container, Button, Grid, TextField } from '@material-ui/core';
 import { useAuth } from "../context/auth";
 import { useUser } from "../context/user";
-import jwt from 'jsonwebtoken';
 import logo from '../img/coffee.png'
 import axios from 'axios';
 import './Login.css';
@@ -14,7 +13,6 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthTokens } = useAuth();
-  const { setUser } = useUser();
 
   function postLogin() {
     axios.post("http://3.121.183.48/api/v1/auth/login/", {

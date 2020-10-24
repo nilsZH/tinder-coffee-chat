@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import './Main.css';
 
-const db = []
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -71,7 +69,7 @@ function Main() {
       <Typography variant="body" component="p">
         {characters[0].role}
       </Typography>
-        {characters[0].interests.map((interest) => (
+        {characters[0].interest_strings.map((interest) => (
           <Chip className="chip" color="primary" label={interest} />
         ))}
       <CardActions>

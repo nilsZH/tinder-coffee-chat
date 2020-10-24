@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, CardContent, Chip, Typography, Button, IconButton } from '@material-ui/core';
+import { Container, Grid, Chip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ChatIcon from '@material-ui/icons/Chat';
 import Table from '@material-ui/core/Table';
@@ -9,7 +9,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useUser } from '../context/user';
 import axios from 'axios';
 import './Matches.css';
 
