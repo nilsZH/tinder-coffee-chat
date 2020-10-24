@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Container, Button, Grid, TextField } from '@material-ui/core';
 import { useAuth } from "../context/auth";
 import jwt from 'jsonwebtoken';
+import logo from '../img/coffee.png'
 import axios from 'axios';
 import './Login.css';
 
@@ -37,7 +38,11 @@ function Login() {
 
   return (
     <Container className="container" maxWidth="xs">
-      <img src="../public/coffee.png" />
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <img className="center" style={{ width: 200, height: 200 }} src={logo} alt={"logo"}/>
+        </Grid>
+      </Grid>
       <form>
         <Grid container spacing={3}>
           <Grid item xs={12}>

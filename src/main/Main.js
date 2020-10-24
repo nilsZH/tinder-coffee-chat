@@ -1,7 +1,8 @@
-import React, { useState,useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import { Card, Container, Grid, CardContent, Chip, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import './Main.css';
 
 const db = [
@@ -57,6 +58,23 @@ function Main() {
   const [characters, setCharacters] = useState(db)
   const [lastDirection, setLastDirection] = useState()
   const classes = useStyles();
+
+  React.useEffect(() => {
+    axios({
+      "method": "GET",
+      "url": "http://google.de",
+      "headers": {
+        "content-type": "application/json",
+      }
+    })
+    .then((response) => {
+      console.log("Done")
+      setCharacters(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, []);
 
   const childRefs = useMemo(() => Array(db.length).fill(0).map(i => React.createRef()), [])
 
