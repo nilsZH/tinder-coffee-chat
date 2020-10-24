@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Link, Route,useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Button} from '@material-ui/core/';
 import { AccountCircle } from '@material-ui/icons'
@@ -9,7 +9,6 @@ import Profile from './profile/Profile';
 import Matches from './matches/Matches';
 import PrivateRoute from './PrivateRoute';
 import { AuthContext, useAuth } from "./context/auth";
-import { UserContext, useUser } from "./context/user";
 import './App.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +62,6 @@ function App(props) {
 
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-      <UserContext.Provider value={{id: 1, username: "admin"}}>
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
@@ -112,7 +110,6 @@ function App(props) {
         <PrivateRoute exact={true} path="/profile" component={Profile} />
         <PrivateRoute exact={true} path="/matches" component={Matches} />
       </div>
-    </UserContext.Provider>
     </AuthContext.Provider>
   );
 }

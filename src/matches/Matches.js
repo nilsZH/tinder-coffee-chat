@@ -1,7 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Grid, CardContent, Chip, Typography, Button, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link, Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import ChatIcon from '@material-ui/icons/Chat';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -28,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 function Matches() {
   const [matches, setMatches] = useState()
   const classes = useStyles();
-  const { username } = useUser()
 
   React.useEffect(() => {
     axios({
@@ -39,7 +37,6 @@ function Matches() {
       }
     })
     .then((response) => {
-      console.log(username)
       setMatches(response.data)
     })
     .catch((error) => {
@@ -59,7 +56,7 @@ function Matches() {
                 label={match.available ? "Available" : "Unavailable"} 
                 color={match.available ? "Primary" : "Basic"} />
         </TableCell>
-        <TableCell>{match.link}</TableCell>
+        <TableCell><ChatIcon /></TableCell>
       </TableRow>
     ))
   }

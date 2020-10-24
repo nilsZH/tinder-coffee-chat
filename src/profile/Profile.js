@@ -39,10 +39,10 @@ function postSubmit() {
 
 function Profile() {
   const profile = {
-    username: "nils",
-    email: "zumhebel.nils@bcgplatinion.com",
+    username: "admin",
+    email: "admin@coffee-talk.com",
     password: "123456",
-    role: "Senior Consultant",
+    role: "CEO",
     interests: ["golf", "cars"],
     description: "This is me"
   }
@@ -120,11 +120,11 @@ function Profile() {
                       label="Hiking"
                     />
                     <FormControlLabel
-                      control={<Checkbox onChange={handleInterests} name="sailing" />}
+                      control={<Checkbox onChange={handleInterests} checked="true" name="sailing" />}
                       label="Sailing"
                     />
                     <FormControlLabel
-                      control={<Checkbox onChange={handleInterests} name="golf" />}
+                      control={<Checkbox onChange={handleInterests} checked="true" name="golf" />}
                       label="Golf"
                     />
                     <FormControlLabel

@@ -1,5 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import TinderCard from 'react-tinder-card';
+import React, { useState } from 'react';
 import { Card, Container, Grid, CardContent, Chip, Typography, Button, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Main() {
   const [characters, setCharacters] = useState()
-  const [lastDirection, setLastDirection] = useState()
   const classes = useStyles();
   React.useEffect(() => {
     axios({
@@ -33,7 +31,9 @@ function Main() {
       }
     })
     .then((response) => {
-      setCharacters(response.data)
+      setCharacters(response.data.filter(user => {
+        return user.available
+      }))
     })
     .catch((error) => {
       console.log(error)
@@ -58,13 +58,18 @@ function Main() {
     card = <Card>
     <CardContent>
       <Typography variant= "h5" gutterBottom>
-        {characters[0].username}
+        {characters[0].username} <Chip size="small" 
+                label={characters[0].available ? "Available" : "Unavailable"} 
+                color={characters[0].available ? "Primary" : "Basic"} /> 
       </Typography>
       <Typography color="textSecondary">
-        {characters[0].email}
+        {characters[0].email} 
       </Typography>
       <Typography variant="body" component="p">
         {characters[0].description}
+      </Typography>
+      <Typography variant="body" component="p">
+        {characters[0].role}
       </Typography>
         {characters[0].interests.map((interest) => (
           <Chip className="chip" color="primary" label={interest} />

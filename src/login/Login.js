@@ -24,7 +24,6 @@ function Login() {
       if (result.status === 200) {
         console.log(result)
         setAuthTokens(result.data);
-        setUser({username: username})
         setLoggedIn(true);
       } else {
         setIsError(true);
