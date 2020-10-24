@@ -37,6 +37,11 @@ function App(props) {
     setAnchorEl(null);
   }
 
+  function handleMain() {
+    history.push("/");
+    setAnchorEl(null);
+  }
+
   function handleMatches() {
     history.push("/matches");
     setAnchorEl(null);
@@ -96,6 +101,7 @@ function App(props) {
                       open={open}
                       onClose={handleClose}
                     >
+                      <MenuItem onClick={handleMain}>Dashboard</MenuItem>
                       <MenuItem onClick={handleProfile}>Profile</MenuItem>
                       <MenuItem onClick={handleMatches}>Matches</MenuItem>
                       <MenuItem onClick={logOut}>Logout</MenuItem>
