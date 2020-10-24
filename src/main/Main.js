@@ -7,34 +7,18 @@ import './Main.css';
 
 const db = [
   {
-    name: 'Richard Hendricks',
-    role: 'Accountant',
-    country: 'UK',
-    interests: ['Swimming', 'Sailing', 'Reading']
+    username: "duarte",
+    name: "Duarte Carmo",
+    role: "Consultant",
+    interests: ["hicking"],
+    description: "This is me"
   },
   {
-    name: 'Erlich Bachman',
-    role: 'CEO',
-    country: 'Germany',
-    interests: ['Golf', 'Game of Thrones', 'Cars']
-  },
-  {
-    name: 'Monica Hall',
-    role: 'CEO',
-    country: 'USA',
-    interests: ['Swimming', 'Hiking', 'Harry Potter']
-  },
-  {
-    name: 'Jared Dunn',
-    role: 'IT Support',
-    country: 'UK',
-    interests: ['Cheese', 'Wine', 'Travel']
-  },
-  {
-    name: 'Dinesh Chugtai',
-    role: 'Sales',
-    country: 'Germany',
-    interests: ['Hiking', 'Nightlife', 'Reading']
+    username: "anke",
+    name: "Anke Haas",
+    role: "Consultant",
+    interests: ["cars", "golf"],
+    description: "This is me"
   }
 ]
 
@@ -119,18 +103,12 @@ function Main() {
                   <Typography color="textSecondary">
                     {character.role}
                   </Typography>
-                  <Typography color="textSecondary">
-                    {character.country}
-                  </Typography>
                   <Typography variant="body" component="p">
-                    I am a hacker from Portugal and enjoy sharing my vim knowledge with my colleagues
+                    {character.description}
                   </Typography>
-                  <p>
-                    <Chip className="chip" color="primary" label="Programming" />
-                    <Chip className="chip" color="primary" label="Hackathon 2020" />
-                    <Chip className="chip" color="primary" label="VIM" />
-                    <Chip className="chip" color="primary" label="Travelling" />
-                  </p>
+                  {character.interests.map((interest) => (
+                    <Chip className="chip" color="primary" label={interest.toUpperCase()} />
+                  ))}
                 </CardContent>
               </Card>
             </TinderCard>

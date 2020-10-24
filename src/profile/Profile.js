@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import './Profile.css';
 
@@ -42,11 +43,38 @@ function Profile() {
     email: "zumhebel.nils@bcgplatinion.com",
     password: "123456",
     role: "Senior Consultant",
-    interests: ["Motorbikes", "Cars", "Travel"],
+    interests: ["golf", "cars"],
     description: "This is me"
   }
   const [user, setUser] = useState(profile);
   const classes = useStyles();
+
+  const handleInterests = (event) => {
+    console.log(event)
+    if (event.target.checked === "true") {
+      let userInterests = [...user.interests].push(event.target.name);
+      console.log(userInterests)
+      setUser({...user, userInterests});
+    } else {
+      let userInterests = [...user.interests].pop(event.target.name);
+      setUser({...user, userInterests});
+    }
+    console.log(user);
+  };
+
+  function postSubmit() {
+    axios.post("http://3.121.183.48/api/v1/rest-auth/login/", {
+      user
+    }).then(result => {
+      if (result.status !== 200) {
+        console.log("OK!")
+      } else {
+        console.log("ERROR!")
+      }
+    }).catch(e => {
+      console.log("ERROR!")
+    })
+  }
 
   return (
     <Container className="container" maxWidth="xs">
@@ -88,20 +116,20 @@ function Profile() {
                   <FormLabel component="legend">Interests</FormLabel>
                   <FormGroup>
                     <FormControlLabel
-                      control={<Checkbox name="gilad" />}
+                      control={<Checkbox onChange={handleInterests} name="hiking" />}
                       label="Hiking"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="jason" />}
-                      label="Nightlife"
+                      control={<Checkbox onChange={handleInterests} name="sailing" />}
+                      label="Sailing"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="antoine" />}
+                      control={<Checkbox onChange={handleInterests} name="golf" />}
+                      label="Golf"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox onChange={handleInterests} name="cars" />}
                       label="Cars"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox name="antoine" />}
-                      label="Sports"
                     />
                   </FormGroup>
                 </FormControl>

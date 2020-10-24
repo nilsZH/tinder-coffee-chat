@@ -15,21 +15,25 @@ function Login() {
   const { setAuthTokens } = useAuth();
 
   function postLogin() {
-//    axios.post("https://cors-anywhere.herokuapp.com/http://3.121.183.48/api/v1/rest-auth/login/", {
-//      username,
-//      password
-//    }).then(result => {
-//      if (result.status !== 200) {
-//        setAuthTokens(result.data);
-//        setLoggedIn(true);
-//      } else {
-//        setIsError(true);
-//      }
-//    }).catch(e => {
+    axios.post("http://3.121.183.48/api/v1/rest-auth/login/", {
+      username,
+      password
+    }).then(result => {
+      if (result.status !== 200) {
+        setAuthTokens(result.data);
+        setLoggedIn(true);
+      } else {
+        setIsError(true);
+      }
+    }).catch(e => {
+      setIsError(true);
+    });
+//    if (username === "nils" && password === "admin") {
+//      setAuthTokens(jwt.sign({ foo: 'bar' }, 'shhhhh'));
+//      setLoggedIn(true);  
+//    } else {
 //      setIsError(true);
-//    });
-    setAuthTokens(jwt.sign({ foo: 'bar' }, 'shhhhh'));
-    setLoggedIn(true);    
+//    }
   }
 
   if (isLoggedIn) {
