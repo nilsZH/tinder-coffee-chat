@@ -9,17 +9,17 @@ import './Login.css';
 function Login() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthTokens } = useAuth();
 
   function postLogin() {
-//    axios.post("http://www.dummy.restapiexample.com/create", {
-//      userName,
+//    axios.post("https://cors-anywhere.herokuapp.com/http://3.121.183.48/api/v1/rest-auth/login/", {
+//      username,
 //      password
 //    }).then(result => {
 //      if (result.status !== 200) {
-//        setAuthTokens(jwt.sign({ foo: 'bar' }, 'shhhhh'));
+//        setAuthTokens(result.data);
 //        setLoggedIn(true);
 //      } else {
 //        setIsError(true);
@@ -44,7 +44,7 @@ function Login() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField fullWidth label="Username" name="username" size="small" variant="outlined" onChange={e => {
-                  setUserName(e.target.value);
+                  setUsername(e.target.value);
                 }}/>
               </Grid>
               <Grid item xs={12}>
