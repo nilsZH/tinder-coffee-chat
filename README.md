@@ -1,4 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tinder Coffee Chat (Frontend) ☕
+
+Tinder coffee chat is an app designed by Team-E for the [BCG Platinion Hackathon 2020.](https://hackathon.bcgplatinion.com/home/)
+
+This repo contains the React Frontend for the PWA. 
+
+The backend can be found in another [repository](https://github.com/duarteocarmo/tinder-coffee-chat). 
+
+We got second place!🎉
 
 ## Available Scripts
 
