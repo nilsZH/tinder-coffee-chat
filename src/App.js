@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { Link, Route,useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Button} from '@material-ui/core/';
-import { AccountCircle } from '@material-ui/icons'
-import Login from './login/Login';
-import Main from './main/Main';
-import Profile from './profile/Profile';
-import Matches from './matches/Matches';
-import PrivateRoute from './PrivateRoute';
+import React, { useState } from "react";
+import { Link, Route, useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+  Button,
+} from "@material-ui/core/";
+import { AccountCircle } from "@material-ui/icons";
+import Login from "./login/Login";
+import Main from "./main/Main";
+import Profile from "./profile/Profile";
+import Matches from "./matches/Matches";
+import PrivateRoute from "./PrivateRoute";
 import { AuthContext, useAuth } from "./context/auth";
-import './App.css';
+import "./App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +58,7 @@ function App(props) {
   const setTokens = (data) => {
     localStorage.setItem("tokens", JSON.stringify(data));
     setAuthTokens(data);
-  }
+  };
 
   function logOut() {
     setAuthTokens();
@@ -71,44 +79,51 @@ function App(props) {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-            <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-              Coffee Time
+              <Link
+                to="/"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                }}
+              >
+                Coffee Time
               </Link>
             </Typography>
-            { authTokens ? 
-                <div>
-                    <IconButton
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      onClick={handleMenu}
-                      color="inherit"
-                    >
-                      <AccountCircle />
-                    </IconButton>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={open}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={handleMain}>Dashboard</MenuItem>
-                      <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                      <MenuItem onClick={handleMatches}>Matches</MenuItem>
-                      <MenuItem onClick={logOut}>Logout</MenuItem>
-                    </Menu>
-                  </div> :
-                <Button color="inherit">Login</Button>
-            }         
+            {authTokens ? (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleMain}>Dashboard</MenuItem>
+                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
+                  <MenuItem onClick={handleMatches}>Matches</MenuItem>
+                  <MenuItem onClick={logOut}>Logout</MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <Button color="inherit">Login</Button>
+            )}{" "}
           </Toolbar>
         </AppBar>
         <Route path="/login" component={Login} />
